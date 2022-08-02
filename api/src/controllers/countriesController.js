@@ -4,45 +4,45 @@ const axios = require("axios");
 const getCountries = async (req, res) => {
   try {
     let countries = await axios.get("https://restcountries.com/v3/all");
-    let response = countries.data?.map((e) => {
+    let response = countries.data?.map((r) => {
       let cap,reg;
       
-      if(typeof e.capital === 'undefined'){
+      if(typeof r.capital === 'undefined'){
         cap="NO capital"
       }else{
-        cap=e.capital[0];
+        cap=r.capital[0];
       }
-      if(typeof e.subregion === 'undefined'){
+      if(typeof r.subregion === 'undefined'){
         reg="NO subregion"
       }else{
-        reg=e.subregion
+        reg=r.subregion
       }
       
 
       return {
-        id: e.cca3,
-        name: e.name.common,
-        image:e.flags[0],
-        continent:e.continents[0],
+        id: r.cca3,
+        name: r.name.common,
+        image:r.flags[0],
+        continent:r.continents[0],
         capital: cap,
         subregion:reg,
-        area:e.area,
-        population:e.population
+        area:r.area,
+        population:r.population
       };
     });
  
    
-    response.forEach(async (e) => {
+    response.forEach(async (r) => {
       await Country.findOrCreate({
         where: {
-          id: e.id,
-          name: e.name,
-          image:e.image,
-          continent:e.continent,
-          capital: e.capital,
-          subregion:e.subregion,
-          area:e.area,
-          population:e.population
+          id: r.id,
+          name: r.name,
+          image:r.image,
+          continent:r.continent,
+          capital: r.capital,
+          subregion:r.subregion,
+          area:r.area,
+          population:r.population
         },
       });
     });
@@ -54,7 +54,7 @@ const getCountries = async (req, res) => {
 
 const getallcountries= async (req,res)=>{
   try{
-    let coun= await Countries.findAll()
+    let coun= await Country.findAll()
     return res.status(200).json(coun)
 }catch(err){
     return res.status(404).send(err.massege);
