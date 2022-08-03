@@ -1,5 +1,6 @@
 const { Country } = require("../db.js");
 const axios = require("axios");
+const { Op } = require("sequelize");
 
 const getCountries = async (req, res) => {
   try {
@@ -46,24 +47,77 @@ const getCountries = async (req, res) => {
         },
       });
     });
-    // return res.send(response)
   } catch (e) {
     console.error(e);
   }
 };
 
 const getallcountries= async (req,res)=>{
+ // console.log("get ALL countries");
   try{
     let coun= await Country.findAll()
+
+    if(!Object.keys(coun).length){
+      return res.status(404).json({
+        msg: "Countries not found in database"
+    })
+    }
     return res.status(200).json(coun)
 }catch(err){
-    return res.status(404).send(err.massege);
+    return res.status(404).send(err.messege);
 }
 }
+
+const getCountryById= async (req,res)=>{
+  //console.log("get country by id");
+  const {id} = req.params;
+  try{
+    let coun= await Country.findAll({
+      where: {
+        id: id
+      }
+    });
+    if(!Object.keys(coun).length){
+      return res.status(404).json({
+        msg: "Country not found"
+    })
+    }
+    return res.status(200).json(coun)
+}catch(err){
+    return res.status(404).send(err.message);
+}
+}
+
+const getCountryByName= async (req,res)=>{
+  //console.log("get country by name");
+  const {name} = req.params;
+  try{
+    let coun= await Country.findAll({
+      where: {
+        name:{
+          [Op.substring]: `%${name}%`
+        }
+      }
+    });
+   
+    if(!Object.keys(coun).length){
+      return res.status(404).json({
+        msg: "Country not found"
+    })
+    }
+    return res.status(200).json(coun)
+}catch(err){
+    return res.status(404).send(err.message);
+}
+}
+
 
 
 
 module.exports = {
     getCountries,
     getallcountries,
+    getCountryById,
+    getCountryByName,
+    
 };
