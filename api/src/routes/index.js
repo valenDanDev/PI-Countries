@@ -8,7 +8,7 @@ const counties = require("./countriesRouter");
 const router = Router();
 
 // Configurar los routers
-//router.use("/activities", countries_activities);
+router.use("/activities", countries_activities);
 router.use("/countries", counties);
 // Ejemplo: router.use('/auth', authRouter);
 
