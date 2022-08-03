@@ -89,8 +89,8 @@ const getCountryById= async (req,res)=>{
 }
 
 const getCountryByName= async (req,res)=>{
-  //console.log("get country by name");
-  const {name} = req.params;
+  console.log("get country by name");
+  const name =req.query.q;
   try{
     let coun= await Country.findAll({
       where: {
