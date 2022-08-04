@@ -37,11 +37,11 @@ const getCountries = async (req, res) => {
       await Country.findOrCreate({
         where: {
           id: r.id,
-          name: r.name,
+          name: r.name.toLowerCase(),
           image:r.image,
-          continent:r.continent,
-          capital: r.capital,
-          subregion:r.subregion,
+          continent:r.continent.toLowerCase(),
+          capital: r.capital.toLowerCase(),
+          subregion:r.subregion.toLowerCase(),
           area:r.area,
           population:r.population
         },
@@ -79,7 +79,7 @@ const getCountryById= async (req,res)=>{
     });
     if(!Object.keys(coun).length){
       return res.status(404).json({
-        msg: "Country not found"
+        msg: `Country not found with code ${id}`
     })
     }
     return res.status(200).json(coun)
@@ -95,14 +95,14 @@ const getCountryByName= async (req,res)=>{
     let coun= await Country.findAll({
       where: {
         name:{
-          [Op.substring]: `%${name}%`
+          [Op.substring]: `%${name.toLowerCase()}%`
         }
       }
     });
    
     if(!Object.keys(coun).length){
       return res.status(404).json({
-        msg: "Country not found"
+        msg: `Country not found with name ${name}`
     })
     }
     return res.status(200).json(coun)

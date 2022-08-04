@@ -23,52 +23,72 @@ const postActivities = async (req, res) =>{
             },
           });
 
-          //console.log(Object.keys(checkActivity).length);
-
-          if(Object.keys(checkActivity).length){
-            return res.status(404).json({
-              msg: "this activity already exists"
-          })
-          }
 
           const countrymatch = await Country.findAll({
             attributes: ['id'],
             where: {
-              name: country,
+              name: country.toLowerCase(),
             },
           });
          
-
+          if(!Object.keys(countrymatch).length){
+            return res.status(404).json({
+              msg: `you need to choose a country before of creating the activity`
+          })
+          }
+          let result2,actId=0;
           let result = countrymatch.map(a => a.id).toString();
-          
+
+          //validate if an activity exists in the country
+
+          let activitymatch= await Activities.findAll({
+            attributes: ['id'],
+            where: {
+              name:name.toLowerCase().trim()
+            }
+           }
+           );
+           if(Object.keys(activitymatch).length){
+            result2 = activitymatch.map(a => a.id);
+              actId=(result2.pop()).toString();
+           }
+        
+          const activityIncountry = await countries_activities.findAll({
+            attributes: ['activityId'],
+            where: {
+              countryId: result,
+              activityId: actId
+            },
+          });
+
+         // console.log(Object.keys(activityIncountry).length);
+
+          if(Object.keys(checkActivity).length && Object.keys(activityIncountry).length){
+            return res.status(404).json({
+              msg: "this activity already exists in this country"
+          })
+          }
     
          await Activities.create({name, dificulty, duration, season})
-
-         let coun= await Activities.findAll({
-          attributes: ['id'],
-          where: {
-            name:name
-          }
-         }
-         );
-         let result2 = coun.map(a => a.id).toString();
-         console.log(result2);
-       
+          
+         
+          activitymatch= await Activities.findAll({
+            attributes: ['id'],
+            where: {
+              name:name
+            }
+           }
+           );
+  
+           result2 = activitymatch.map(a => a.id);
+           actId=(result2.pop()).toString();    
+        //console.log(actId);    
          let obj1 = {
           countryId: result,
-          activityId: result2
+          activityId: actId
        }  
-
-        
-
-        const {countryId,activityId}=obj1;
-       
-       console.log(obj1);
-        
+        const {countryId,activityId}=obj1;      
          await countries_activities.create({countryId,activityId})
-         
-         
-          
         return res.status(200).send("activity created succesfully")
     } catch (error) {
         return res.status(404).send(error.message)
