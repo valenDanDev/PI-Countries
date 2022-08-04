@@ -1,4 +1,4 @@
-const { Country } = require("../db.js");
+const { Country,Activities } = require("../db.js");
 const axios = require("axios");
 const { Op } = require("sequelize");
 
@@ -75,7 +75,7 @@ const getCountryById= async (req,res)=>{
     let coun= await Country.findAll({
       where: {
         id: id
-      }
+      },include:Activities
     });
     if(!Object.keys(coun).length){
       return res.status(404).json({

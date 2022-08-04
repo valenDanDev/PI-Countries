@@ -1,7 +1,7 @@
-const {Activities} = require("../db.js");
+const {Activities,Country,countries_activities} = require("../db.js");
 
 const postActivities = async (req, res) =>{
-    const { name,dificulty,duration,season} = req.body
+    const { name,dificulty,duration,season,country } = req.body
     try {
         if (!name || !dificulty || !duration || !season ){
             return res.status(404).send("You need more information!!")
@@ -30,8 +30,44 @@ const postActivities = async (req, res) =>{
               msg: "this activity already exists"
           })
           }
+
+          const countrymatch = await Country.findAll({
+            attributes: ['id'],
+            where: {
+              name: country,
+            },
+          });
+         
+
+          let result = countrymatch.map(a => a.id).toString();
+          
     
          await Activities.create({name, dificulty, duration, season})
+
+         let coun= await Activities.findAll({
+          attributes: ['id'],
+          where: {
+            name:name
+          }
+         }
+         );
+         let result2 = coun.map(a => a.id).toString();
+         console.log(result2);
+       
+         let obj1 = {
+          countryId: result,
+          activityId: result2
+       }  
+
+        
+
+        const {countryId,activityId}=obj1;
+       
+       console.log(obj1);
+        
+         await countries_activities.create({countryId,activityId})
+         
+         
           
         return res.status(200).send("activity created succesfully")
     } catch (error) {
