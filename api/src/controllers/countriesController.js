@@ -2,7 +2,7 @@ const { Country,Activities } = require("../db.js");
 const axios = require("axios");
 const { Op } = require("sequelize");
 
-const getCountries = async (req, res) => {
+const getCountries = async () => {
   try {
     let countries = await axios.get("https://restcountries.com/v3/all");
     let response = countries.data?.map((r) => {
