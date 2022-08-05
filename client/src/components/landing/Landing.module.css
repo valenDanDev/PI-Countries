@@ -1,0 +1,42 @@
+.landing_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.landing_container img{
+    max-width: 100%;
+    max-height: 100%;
+    background-color: black;
+}
+
+.landing_info{
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 5px;
+    position:absolute;
+    margin-left: 40%;
+    margin-top: 20%;
+}
+
+.landing_info h2{
+    color: #fff;
+}
+
+.landing_info a {
+    font-weight: 900;
+    padding: 2px;
+    display: block;
+    background-color: #B39C21;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.landing_info a:hover {
+    cursor: pointer;
+    background-color: #DCBC10;
+    
+    
+}
