@@ -20,14 +20,9 @@ export default function Navbar (){
                   className={ ({isActive}) => `link  ${ isActive ? 'active':'' }` }
                   to="/activities"
               >
-               Ver lista de activiadades
+               lista de actividades
               </NavLink>
-              <NavLink 
-                  className={ ({isActive}) => `link  ${ isActive ? 'active':'' }` }
-                  to="/search"
-              >
-                  Search
-              </NavLink>
+               Search
           </div>
      
                 
