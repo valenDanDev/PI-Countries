@@ -15,7 +15,7 @@ export function getCountriesName(name) {
   return async function (dispatch) {
     try {
       var json = await axios.get(
-        'http://localhost:3001/countries?name=' + name
+        `http://localhost:3001/countries/country?q=${name}`
       );
 
       console.log(json.data);
@@ -41,17 +41,6 @@ export function getDetail(id) {
   };
 }
 
-// export function addActivity(payload) {
-//   return async function (dispatch) {
-//     var json = await axios.post("http://localhost:3001/activity", payload);
-
-//     // return json
-//     return dispatch({
-//       type: "POST_ACTIVITY",
-//       payload: json.data,
-//     });
-//   };
-// }
 
 export const addActivity = (dataAct) => {
   return function (dispatch) {
@@ -83,16 +72,7 @@ export function getCountriesId(id) {
   };
 }
 
-export function filterCountriesContinent(payload) {
-  // return async function (dispatch) {
-  // var json = await axios.get("http://localhost:3001/countries");
 
-  return {
-    type: 'FILTER_BY_CONTINENT',
-    payload,
-  };
-  // };
-}
 
 export function setCountriesSort(payload) {
   // return async function (dispatch) {
@@ -103,6 +83,17 @@ export function setCountriesSort(payload) {
     payload: {
       asc: payload,
     },
+  };
+  // };
+}
+
+export function filterCountriesContinent(payload) {
+  // return async function (dispatch) {
+  // var json = await axios.get("http://localhost:3001/countries");
+
+  return {
+    type: 'FILTER_BY_CONTINENT',
+    payload,
   };
   // };
 }

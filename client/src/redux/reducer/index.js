@@ -3,10 +3,10 @@
 
 const initialState = {
     countries: [],
-    /*allCountries: [],
+    allCountries: [],
     detail: [],
     activities: [],
-    continentFilter: []*/
+    /*continentFilter: []*/
   };
   
   function rootReducer(state = initialState, action) {
@@ -14,13 +14,14 @@ const initialState = {
       case 'GET_COUNTRIES':
         return {
           ...state,
-          countries: action.payload,
+          allCountries: action.payload,
+          
         };
   
       case 'GET_COUNTRIES_NAME':
         return {
           ...state,
-          countries: action.payload,
+          allCountries: action.payload,
         };
   
       case 'GET_DETAIL':
