@@ -1,0 +1,6 @@
+.pagination{
+    display: flex;
+}
+.page_item{
+    list-style:none ;
+}
