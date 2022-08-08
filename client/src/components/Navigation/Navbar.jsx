@@ -1,11 +1,13 @@
 import { Link, NavLink } from 'react-router-dom';
 import styles from "./Navbar.module.css"
+//import Filter from './Filters';
 
 
 export default function Navbar (){
 
     return (
-        <nav className={styles.navigation}>
+        <nav className={styles.nav_container}>
+        <div className={styles.navigation}>
             
             <Link className={styles.logo} to="/home">
                 Countries
@@ -26,6 +28,9 @@ export default function Navbar (){
           </div>
      
                 
+        </div>
+       
+          
         </nav>
     );
 }
