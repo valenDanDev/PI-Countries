@@ -32,7 +32,7 @@ export function getCountriesName(name) {
 
 export function getDetail(id) {
   return async (dispatch) => {
-    var json = await axios.get('http://localhost:3001/countries/' + id);
+    var json = await axios.get(`http://localhost:3001/countries/country/${id}`);
 
     return dispatch({
       type: 'GET_DETAIL',

@@ -2,7 +2,7 @@
 
 
 const initialState = {
-    countries: [],
+    countriesForContinents: [],
     allCountries: [],
     detail: [],
     activities: [],
@@ -15,6 +15,7 @@ const initialState = {
         return {
           ...state,
           allCountries: action.payload,
+          countriesForContinents: action.payload,
           
         };
   
@@ -27,7 +28,7 @@ const initialState = {
       case 'GET_DETAIL':
         return {
           ...state,
-          countries: action.payload,
+          detail: action.payload,
         };
   
       case 'POST_ACTIVITY':
@@ -46,7 +47,7 @@ const initialState = {
         const asc = action.payload.asc;
         return {
           ...state,
-          countries: state.countries.sort((a, b) => {
+          allCountries: state.allCountries.sort((a, b) => {
             if (asc) {
               return a.name.localeCompare(b.name);
             }
@@ -55,7 +56,7 @@ const initialState = {
         };
   
       case 'FILTER_BY_CONTINENT':
-        const allCountries = state.allCountries;
+        const allCountries = state.countriesForContinents;
         const continentFilter =
           action.payload === 'All'
             ? allCountries
@@ -65,7 +66,7 @@ const initialState = {
   
         return {
           ...state,
-          countries: continentFilter,
+          allCountries: continentFilter,
         };
   
       default:

@@ -31,7 +31,6 @@ export default function Cards() {
     lastCountry
   );
 
- // console.log(currentCountries);
 
 
   const paginated = (pageNumber) => setCurrentPage(pageNumber);
@@ -43,21 +42,21 @@ export default function Cards() {
   }, []);
 
   function handleClick(e) {
-    // ui.setLoading(true);
+    
     e.preventDefault();
     dispatch(getAllCountries());
-    // ui.setLoading(false);
-   // console.log(getAllCountries);
+
   }
 
   function handleSortBy(e) {
-    dispatch(setCountriesSort(e.target.value === 'asc'));
+    dispatch(setCountriesSort(e.target.value.toLowerCase() === 'asc'));
     setCurrentPage(1);
   }
 
   
   function handleFilterContinent(e) {
-    dispatch(filterCountriesContinent(e.target.value));
+    let i=e.target.value.toLowerCase();
+    dispatch(filterCountriesContinent(i));
     setCurrentPage(1);
   }
 
