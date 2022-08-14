@@ -17,14 +17,9 @@ export default function Navbar (){
               <NavLink 
                   className={ ({isActive}) => `link  ${ isActive ? 'active':'' }` }
                   to="/activitiesCreate"
-              >  Crear Actividades   </NavLink>  
-              <NavLink 
-                  className={ ({isActive}) => `link  ${ isActive ? 'active':'' }` }
-                  to="/activities"
-              >
-               lista de actividades
-              </NavLink>
-               Search
+              >  Create activities   </NavLink>  
+            
+
           </div>
      
                 

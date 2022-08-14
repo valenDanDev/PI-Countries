@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getAllCountries,setCountriesSort,filterCountriesContinent } from '../../redux/actions';
+import { getAllCountries,orderByName,filterCountriesContinent,orderByPopulation } from '../../redux/actions';
 import Card from './Card'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,91 +10,76 @@ import SearchBar from './SearchBar';
 
 
 export default function Cards() {
-
   const dispatch = useDispatch();
   const countries = useSelector(
     (state) => state.allCountries,
-    () => false
   );
 
-
   const [currentPage, setCurrentPage] = useState(1);
-  const countriesXPage = 9;
+  let countriesXPage = 10;
+  let firstCountry,lastCountry
+  const [, setOrden] = useState("");
 
-
-  const lastCountry = currentPage * countriesXPage;
- 
-  const firstCountry = lastCountry - countriesXPage;
+  if(currentPage>1){
+    countriesXPage=9
+    lastCountry = (currentPage * countriesXPage)+1; 
+    firstCountry = lastCountry - countriesXPage;
+  }else{
+    lastCountry = (currentPage * countriesXPage);
+    firstCountry = lastCountry - countriesXPage;
+  }
 
   const currentCountries = countries.slice(
     firstCountry,
     lastCountry
   );
 
-
-
   const paginated = (pageNumber) => setCurrentPage(pageNumber);
-
   useEffect(() => {
-    // ui.setLoading(true);
     dispatch(getAllCountries());
-    // ui.setLoading(false);
   }, []);
 
   function handleClick(e) {
-    
     e.preventDefault();
     dispatch(getAllCountries());
-
   }
 
   function handleSortBy(e) {
-    dispatch(setCountriesSort(e.target.value.toLowerCase() === 'asc'));
+    let i=e.target.value.toLowerCase();
+    dispatch(orderByName(i));
     setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
+  }
+  function handleSortByP(e) {
+    let i=e.target.value.toLowerCase();
+    dispatch(orderByPopulation(i));
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
   }
 
-  
   function handleFilterContinent(e) {
     let i=e.target.value.toLowerCase();
     dispatch(filterCountriesContinent(i));
     setCurrentPage(1);
   }
 
-
-
-  
-
-
-
-  
- 
-
-  return (
-
-    
+  return (    
     <div className={styles.cards}>
-
-<div className="filter_container">
-        el search
+      <div className={styles.filter_container}>
+        <div >
+        <h2 >Search country:</h2> 
           <SearchBar/>
-          <button
-          className="btn"
-          onClick={(e) => {
-            handleClick(e);
-          }}
-        >
-          Back
-        </button>
-        
-        <div className="select_container">
-        <h2 className="sort-by">Sort by:</h2>
-        <select onChange={(e) => handleSortBy(e)}>
-          <option value="asc">Sort By:</option>
+          <button className={styles.buton_b} onClick={(e) => {handleClick(e); }}   > Back</button>
+        </div>
+        <div >
+        <h2 >Sort by:</h2>
+        <select onChange={(e) => handleSortBy(e)} className={styles.select_container}>
+          <option  hidden value="All">Sort By name:</option>
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
         </select>
-        <select onChange={(e) => handleFilterContinent(e)}>
-          <option value="All">Filter by continent:</option>
+        <select onChange={(e) => handleFilterContinent(e)} className={styles.select_container}>
+          <option hidden  value="All">Filter by continent:</option>
           <option value="South America"> South America </option>
           <option value="North America"> North America </option>
           <option value="Europe"> Europe </option>
@@ -102,24 +87,21 @@ export default function Cards() {
           <option value="Asia"> Asia </option>
           <option value="Oceania"> Oceania </option>
         </select>
-        <option value="activity">Activity</option>
+        <select onChange={(e) => handleSortByP(e)} className={styles.select_container}>
+          <option  hidden value="All">Sort By population:</option>
+          <option value="asc">higher population</option>
+          <option value="desc">lower population</option>
+        </select>
       </div>
-
-      <div className="paginate">
+      </div>
+      <div >
         <Pagination
           countriesXPage={countriesXPage}
           countries={countries.length}
           paginate={paginated}
         />
       </div>
-
-      
-        
-      </div>
-
-
       <div className={styles.cards_container} >
-   
         {currentCountries.length
           ? currentCountries.map((country) => {
               return (
@@ -129,7 +111,7 @@ export default function Cards() {
                     />
               );
             })
-          : 'Loading...'}
+          : 'loading...'}
       </div>
     </div>
   );

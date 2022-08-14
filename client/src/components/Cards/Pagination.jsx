@@ -2,9 +2,8 @@ import styles from "./Pagination.module.css"
 
 export default function Pagination(props) {
   const pageNumbers = [];
-
   for (var i = 1;
-    i <= Math.ceil(props.countries / props.countriesXPage);
+    i <= Math.ceil(props.countries / 9);
     i++
   ) {
     pageNumbers.push(i);

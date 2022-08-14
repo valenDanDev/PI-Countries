@@ -7,8 +7,7 @@ import Cards from '../Cards/Cards';
 export default function Home() {
     return (
         <div className={styles.home_container}>
-           <Navbar/>
-        
+            <Navbar/>
             <Cards/>
         </div>
     )}

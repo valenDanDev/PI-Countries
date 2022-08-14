@@ -4,3 +4,20 @@
 .page_item{
     list-style:none ;
 }
+
+.page_item > button{
+    width: 40px;
+    border-radius: 8px;
+    margin-left: 2px;
+    color: white;
+    background-color: black;
+    border-color:#B39C21 ;
+}
+
+.page_item > button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+    
+}

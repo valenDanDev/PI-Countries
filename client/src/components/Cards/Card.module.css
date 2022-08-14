@@ -1,14 +1,45 @@
 
 
 .card_container{
+    border-radius: 4px;
     display: flex;
-    justify-content: space-evenly;
-    width: 350px;
-    height: 100px;
+    height: 113px;
+    border: 1px solid #B39C21;
    }
 
    .card_container img{
-	max-height: 300px;
 	width: 50%;
-    border: 1px solid #000;
+    height: 100%;
+    border: 1px solid #B39C21;
+    border-radius: 4px;
+}
+
+.card_info{
+ margin-left: 3px;   
+ width: 50%;
+}
+.card_info >h3{
+    text-transform: capitalize;
+    margin-left: 3px;
+    color: white;
+}
+
+.card_info >p{
+    text-transform: capitalize;
+    margin-left: 3px;
+    color: white;
+}
+
+.button_info{
+    display: block;
+    background-color: #B39C21;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+}
+
+.button_info:hover{
+    cursor: pointer;
+    background-color: #DCBC10;
 }

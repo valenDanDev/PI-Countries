@@ -1,0 +1,26 @@
+.input{
+    margin: 0 5px 0 5px;
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    height: 30px;
+    width:  210px;
+}
+
+.SearchBar >button{
+    border-radius: 4px;
+
+    height: 36px;
+    width:  100px;
+    color: white;
+    background-color: black;
+    border-color:#B39C21 ;
+}
+
+.SearchBar >button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+}

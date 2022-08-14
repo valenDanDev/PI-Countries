@@ -4,7 +4,7 @@
 const initialState = {
     countriesForContinents: [],
     allCountries: [],
-    detail: [],
+    detail: {},
     activities: [],
     /*continentFilter: []*/
   };
@@ -26,34 +26,25 @@ const initialState = {
         };
   
       case 'GET_DETAIL':
+        console.log(action.payload);
         return {
           ...state,
           detail: action.payload,
         };
   
-      case 'POST_ACTIVITY':
-        return {
-          ...state,
-          activities: action.payload,
-        };
+        case 'POST_ACTIVITY':
+          return {
+            ...state,
+            activities: [...state.activities, action.payload]
+          };
   
-      case 'GET_ACTIVITIES':
-        return {
-          ...state,
-          activities: action.payload,
-        };
+        case 'CREATE_NEW_ACTIVITY':
+          return {
+            ...state,
+            newActivity: action.payload,
+          };
   
-      case 'SET_SORT':
-        const asc = action.payload.asc;
-        return {
-          ...state,
-          allCountries: state.allCountries.sort((a, b) => {
-            if (asc) {
-              return a.name.localeCompare(b.name);
-            }
-            return b.name.localeCompare(a.name);
-          }),
-        };
+
   
       case 'FILTER_BY_CONTINENT':
         const allCountries = state.countriesForContinents;
@@ -68,6 +59,31 @@ const initialState = {
           ...state,
           allCountries: continentFilter,
         };
+
+        
+        case 'ORDER_BY_NAME':
+          return {
+            ...state,
+            allCountries: state.allCountries.sort((a, b) => {
+              if (action.payload==='asc') {
+                return a.name.localeCompare(b.name);
+              }
+              return b.name.localeCompare(a.name);
+            }),
+          };
+
+
+
+            case 'ORDER_BY_POPULATION':
+              return {
+                ...state,
+                allCountries: state.allCountries.sort((a, b) => {
+                  if (action.payload==='asc') {
+                    return (b.population)-(a.population);
+                  }
+                  return (a.population)- (b.population);
+                }),
+              };
   
       default:
         return state;

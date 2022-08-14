@@ -1,0 +1,79 @@
+.activities{
+    background-image: url('../Cards/countries.png');
+    background-size: 100%;
+    background-color: black;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activities>h2{
+  color: white;
+  text-transform: uppercase;
+}
+.form{
+    margin-top: 20px;
+    width: 70%;
+    border: #B39C21 solid 1px;
+    border-radius: 4px;
+    background-color: black;
+}
+
+.textContainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 15px;
+}
+
+.container{
+    margin-top: 10px;
+}
+.select_container{
+    margin: 0 5px 0 5px;
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    height: 36px;
+    width:  210px;
+}
+
+.buton_b{
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 5px 0 5px;
+    height: 36px;
+    width: 200px;
+}
+.buton_b:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+}
+
+.input{
+    margin: 0 5px 0 5px;
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    height: 30px;
+    width:  210px;
+}
+
+.label{
+    color: white;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.container{
+    margin-left: 5px;
+}

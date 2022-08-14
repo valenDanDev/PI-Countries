@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom';
 
 
 export default function Card({ image, name, continent,id }) {
+   // console.log(id);
     return (
         <div className={styles.card_container}>
-            <img className="img" src={image} alt="Img not found" />   
+            <img src={image} alt="Img not found" />   
             <div className={styles.card_info}>
                  <h3>{name}</h3>
                  <p>{continent}</p>
+                 < Link to={`/countries/country/${ id }`} className={styles.button_info}>
+                     more..
+                 </Link> 
             </div>       
-            < Link to={`/countries/country/${ id }`} className={styles.button_info}>
-                                More..
-            </Link> 
+            
         </div>
     );
     }

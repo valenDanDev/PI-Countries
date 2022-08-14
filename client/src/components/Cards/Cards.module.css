@@ -1,10 +1,48 @@
 .cards_container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    grid-gap: 20px;
-    justify-self: center;
+    grid-gap: 15px;
+    padding: 5px;
+
 }
 
 .cards{
-    margin-top: 10px;
+    margin-top: 1px;
+    background-image: url('./countries.png');
+    background-size: 100%;
+    background-color: black;
 }
+
+.filter_container{
+    display: flex;
+    color: white;
+}
+
+.select_container{
+    margin: 0 5px 0 5px;
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    height: 36px;
+    width:  210px;
+}
+
+.buton_b{
+    background-color: black;
+    border-color:#B39C21 ;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 5px 0 5px;
+    height: 36px;
+    width: 50px;
+}
+.buton_b:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+}
+
+
+
