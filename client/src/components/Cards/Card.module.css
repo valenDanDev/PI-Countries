@@ -17,6 +17,7 @@
 .card_info{
  margin-left: 3px;   
  width: 50%;
+ background-color: black;
 }
 .card_info >h3{
     text-transform: capitalize;
