@@ -4,7 +4,6 @@ import LandingPage from './components/landing/Landing';
 import Home from './components/home/Home';
 import CardDetail from './components/Cards/CardDetail';
 import AddActivity from './components/activities/activity';
-import Navbar from './components/Navigation/Navbar';
 
 function App() {
   return (

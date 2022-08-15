@@ -1,9 +1,8 @@
-import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCountriesName } from '../../redux/actions';
 import styles from './SearchBar.module.css';
-// import { useHistory } from 'react-router-dom';
+
 
 
 

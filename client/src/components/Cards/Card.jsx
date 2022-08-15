@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Card.module.css';
 import { Link } from 'react-router-dom';
 
@@ -14,8 +13,7 @@ export default function Card({ image, name, continent,id }) {
                  < Link to={`/countries/country/${ id }`} className={styles.button_info}>
                      more..
                  </Link> 
-            </div>       
-            
+            </div>             
         </div>
     );
     }

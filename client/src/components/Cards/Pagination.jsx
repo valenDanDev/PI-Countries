@@ -19,7 +19,6 @@ export default function Pagination(props) {
               <button
                 onClick={() => props.paginate(number)}
                 href="/#"
-                className="page-link"
               >
                 {number}
               </button>

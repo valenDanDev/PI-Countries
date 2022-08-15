@@ -3,7 +3,7 @@
 .card_container{
     border-radius: 4px;
     display: flex;
-    height: 113px;
+    height: 140px;
     border: 1px solid #B39C21;
    }
 
@@ -31,6 +31,7 @@
 }
 
 .button_info{
+    margin-bottom: 30px;
     display: block;
     background-color: #B39C21;
     text-align: center;

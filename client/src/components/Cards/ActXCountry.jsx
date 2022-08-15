@@ -1,10 +1,12 @@
-export default function ActXcountries({id, name , difficulty, duration, season}) {
+ import styles from './ActXcountries.module.css'
+export default function ActXcountries({id, name , difficulty, duration, season,country}) {
     return (
-          <div  key={id}>
-              <span>Activity: {name}</span><br/>
-              <span>Difficulty: {difficulty}</span><br/>
-              <span>Duration: {duration}</span><br/>
-              <span>Season: {season}</span>
+          <div  className={styles.actXc} key={id}>
+            <h2>Activities in {country}</h2>
+              <p>Activity: {name}</p><br/>
+              <p>Difficulty: {difficulty}</p><br/>
+              <p>Duration: {duration}</p><br/>
+              <p>Season: {season}</p>
           </div>
     )
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getAllCountries,orderByName,filterCountriesContinent,orderByPopulation } from '../../redux/actions';
+import { getAllCountries,orderByName,filterCountriesContinent,orderByPopulation,getActivities ,filterActivity} from '../../redux/actions';
 import Card from './Card'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,8 @@ export default function Cards() {
   const countries = useSelector(
     (state) => state.allCountries,
   );
+  const activities = useSelector(
+    (state) => state.activities);
 
   const [currentPage, setCurrentPage] = useState(1);
   let countriesXPage = 10;
@@ -35,9 +37,13 @@ export default function Cards() {
   );
 
   const paginated = (pageNumber) => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(getAllCountries());
-  }, []);
+    dispatch(getActivities());
+  }, [dispatch]);
+
+
 
   function handleClick(e) {
     e.preventDefault();
@@ -63,10 +69,19 @@ export default function Cards() {
     setCurrentPage(1);
   }
 
+  function handleFilterActivity(e) {
+    dispatch(filterActivity(e.target.value));
+    setCurrentPage(1);
+  }
+
+  function handleSearch(e) {
+    setCurrentPage(1);
+  }
+
   return (    
     <div className={styles.cards}>
       <div className={styles.filter_container}>
-        <div >
+        <div onChange={(e) => handleSearch(e)}  >
         <h2 >Search country:</h2> 
           <SearchBar/>
           <button className={styles.buton_b} onClick={(e) => {handleClick(e); }}   > Back</button>
@@ -91,6 +106,13 @@ export default function Cards() {
           <option  hidden value="All">Sort By population:</option>
           <option value="asc">higher population</option>
           <option value="desc">lower population</option>
+        </select>
+        <select className={styles.select_container} onChange={(e) => handleFilterActivity(e)}>
+        <option  hidden value="none">Sort By activities:</option>
+          <option value="All"> All activities </option>
+          {activities.map((v) => (
+            <option key={v.id} value={v.name}>{v.name}</option>
+          ))}
         </select>
       </div>
       </div>
