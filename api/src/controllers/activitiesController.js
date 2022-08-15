@@ -10,21 +10,18 @@ const postActivities = async (req, res) =>{
             return res.status(404).send("the dificulty of the activity must be between 1 and 5!!")
         }
         
-        if(season.toLowerCase()!=="verano" && season.toLowerCase()!=="otoño"
-          && season.toLowerCase()!=="invierno " && season.toLowerCase()!=="primavera" 
+        if(season.toLowerCase()!=="summer" && season.toLowerCase()!=="autumn"
+          && season.toLowerCase()!=="winter" && season.toLowerCase()!=="spring" 
         ){
-            return res.status(404).send("you must type one of  the four seasons (verano,otoño,invierno,primavera)!!")
+          
+            return res.status(404).send("you must type one of  the four seasons (summer,autumn,winter,spring)!!")
         }
-
-      
-        let checkActivity = await Activities.findAll({
+          let checkActivity = await Activities.findAll({
             where: {
               name: name,
             },
           });
-
-
-          const countrymatch = await Country.findAll({
+         const countrymatch = await Country.findAll({
             attributes: ['id'],
             where: {
               name: country.toLowerCase(),
@@ -68,10 +65,7 @@ const postActivities = async (req, res) =>{
               msg: "this activity already exists in this country"
           })
           }
-    
          await Activities.create({name, dificulty, duration, season})
-          
-         
           activitymatch= await Activities.findAll({
             attributes: ['id'],
             where: {
@@ -79,7 +73,6 @@ const postActivities = async (req, res) =>{
             }
            }
            );
-  
            result2 = activitymatch.map(a => a.id);
            actId=(result2.pop()).toString();    
         //console.log(actId);    
@@ -87,10 +80,9 @@ const postActivities = async (req, res) =>{
           countryId: result,
           activityId: actId
        }  
-        const {countryId,activityId}=obj1;      
-         await countries_activities.create({countryId,activityId})
+         await countries_activities.create(obj1)
         return res.status(200).send("activity created succesfully")
-    } catch (error) {
+       } catch (error) {
         return res.status(404).send(error.message)
     }
 }
@@ -98,14 +90,14 @@ const postActivities = async (req, res) =>{
 const getallactivities= async (req,res)=>{
     // console.log("get ALL activities");
      try{
-       let coun= await Activities.findAll()
+       let activities= await Activities.findAll()
    
-       if(!Object.keys(coun).length){
+       if(!Object.keys(activities).length){
          return res.status(404).json({
            msg: "Activities not found in database"
        })
        }
-       return res.status(200).json(coun)
+       return res.status(200).send(activities)
    }catch(err){
        return res.status(404).send(err.message);
    }

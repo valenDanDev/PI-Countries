@@ -55,7 +55,9 @@ const getCountries = async () => {
 const getallcountries= async (req,res)=>{
  // console.log("get ALL countries");
   try{
-    let coun= await Country.findAll()
+    let coun= await Country.findAll({
+      include: Activities
+    })
 
     if(!Object.keys(coun).length){
       return res.status(404).json({
@@ -67,6 +69,8 @@ const getallcountries= async (req,res)=>{
     return res.status(404).send(err.messege);
 }
 }
+
+
 
 const getCountryById= async (req,res)=>{
   //console.log("get country by id");
@@ -119,5 +123,4 @@ module.exports = {
     getallcountries,
     getCountryById,
     getCountryByName,
-    
 };
