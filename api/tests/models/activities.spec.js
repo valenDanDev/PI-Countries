@@ -49,7 +49,7 @@ describe('Activities model', () => {
             .catch(() => done());
         });
         it('should work when its a valid season', () => {
-          Activities.create({ season: 'invierno' });
+          Activities.create({ season: 'winter' });
         });
       });
   });
