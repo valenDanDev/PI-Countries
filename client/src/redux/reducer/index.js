@@ -1,12 +1,8 @@
-
-
-
 const initialState = {
-    countriesForContinents: [],
     allCountries: [],
+    countriesBackup: [],
     detail: {},
     activities: [],
-    /*continentFilter: []*/
   };
   
   function rootReducer(state = initialState, action) {
@@ -15,53 +11,31 @@ const initialState = {
         return {
           ...state,
           allCountries: action.payload,
-          countriesForContinents: action.payload,
-          
+          countriesBackup: action.payload,   
         };
-  
       case 'GET_COUNTRIES_NAME':
         return {
           ...state,
           allCountries: action.payload,
         };
-  
       case 'GET_DETAIL':
-        console.log(action.payload);
+        //console.log(action.payload);
         return {
           ...state,
           detail: action.payload,
         };
-  
-        case 'POST_ACTIVITY':
-          return {
-            ...state,
-            activities: [...state.activities, action.payload]
-          };
-  
-        case 'CREATE_NEW_ACTIVITY':
+      case 'CREATE_NEW_ACTIVITY':
           return {
             ...state,
             newActivity: action.payload,
           };
-  
-
-  
-      case 'FILTER_BY_CONTINENT':
-        const allCountries = state.countriesForContinents;
-        const continentFilter =
-          action.payload === 'All'
-            ? allCountries
-            : allCountries.filter(
-                (country) => country.continent === action.payload
-              );
-  
-        return {
-          ...state,
-          allCountries: continentFilter,
-        };
-
-        
-        case 'ORDER_BY_NAME':
+      case 'GET_ACTIVITIES':
+            //console.log(action.payload)
+            return {
+                ...state,
+                activities: action.payload,
+            }
+      case 'ORDER_BY_NAME':
           return {
             ...state,
             allCountries: state.allCountries.sort((a, b) => {
@@ -71,10 +45,20 @@ const initialState = {
               return b.name.localeCompare(a.name);
             }),
           };
-
-
-
-            case 'ORDER_BY_POPULATION':
+      case 'FILTER_BY_CONTINENT':
+            const allCountries = state.countriesBackup;
+            const continentFilter =
+              action.payload === 'All'
+                ? allCountries
+                : allCountries.filter(
+                    (country) => country.continent === action.payload
+                  );
+      
+            return {
+              ...state,
+              allCountries: continentFilter,
+            };
+        case 'ORDER_BY_POPULATION':
               return {
                 ...state,
                 allCountries: state.allCountries.sort((a, b) => {
@@ -83,11 +67,21 @@ const initialState = {
                   }
                   return (a.population)- (b.population);
                 }),
-              };
-  
+              };   
+        case 'FILTER_ACTIVITY':
+            const filtredCountriesByActivities = state.countriesBackup
+            const continentFilteredBA = filtredCountriesByActivities.filter((c) => { return c.activities.find((c) => { return c.name === action.payload; }); });
+            const filterAll=filtredCountriesByActivities.filter((c) => { return c.activities.length>0; });
+            if (action.payload === 'All') {
+                return { ...state, allCountries: filterAll }
+            } else {
+                return {
+                    ...state,
+                    allCountries: continentFilteredBA
+                }
+            }
       default:
         return state;
     }
   }
-  
   export default rootReducer;
