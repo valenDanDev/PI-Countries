@@ -15,8 +15,12 @@ export default function CardDetail (){
   const { id } = useParams();
   useEffect(() => {
       dispatch(getDetail(id)); 
-  },[dispatch]);  // eslint-disable-line react-hooks/exhaustive-deps
+     
+  },[dispatch,id]);  
  
+
+
+
   return (
     <div>
         <Navbar/>
@@ -28,15 +32,15 @@ export default function CardDetail (){
          <div className={styles.details_container}>
              <img src={details.image} alt="flag_image" className={styles.image} />
              <div className={styles.infoDetail}>
+          
                   <h3>{details.name}</h3>
-                  <p>Código: {details.id}</p>
+                  <p>Code: {details.id}</p>
                   <p>Capital: {details.capital}</p>
                   <p>Subregion: {details.subregion}</p>
                   <p>Area: {details.area } km<sup>2</sup></p>
-                  <p>Población: {details.population}</p> 
-                  
+                  <p>Population: {details.population}</p> 
                   <div >
-                     {details.activities?.map(r => {
+                     {details.activities?.length > 0 ? details.activities?.map(r => {
                          return (
                              <ActXcountries
                                  country={details.name}
@@ -49,12 +53,14 @@ export default function CardDetail (){
                              />
                          )
                      })
-                     }
+                     : <p className={styles.error}>There are no activities !!</p>}
+                     
+                     </div>
                      <Link to='/home'><button className={styles.card_d} >Back Home</button></Link>  
-                 </div>
+                 
              </div>
               
-         </div> : null}
+         </div> :<p className={styles.error}>There are no details !!</p> }
        
        
  </div>

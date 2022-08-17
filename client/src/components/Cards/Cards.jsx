@@ -133,7 +133,7 @@ export default function Cards() {
                     />
               );
             })
-          : 'loading...'}
+          : <p className={styles.loading}>Loading ...</p>}
       </div>
     </div>
   );

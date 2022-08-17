@@ -62,3 +62,8 @@
 .infoDetail > h3{
  text-transform: capitalize;
 }
+
+.error{
+    color: red;
+    text-align: center;
+}
