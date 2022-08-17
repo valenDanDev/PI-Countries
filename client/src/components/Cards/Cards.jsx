@@ -54,13 +54,13 @@ export default function Cards() {
     let i=e.target.value.toLowerCase();
     dispatch(orderByName(i));
     setCurrentPage(1);
-    setOrden(`Ordenado ${e.target.value}`);
+    setOrden(e.target.value);
   }
   function handleSortByP(e) {
     let i=e.target.value.toLowerCase();
     dispatch(orderByPopulation(i));
     setCurrentPage(1);
-    setOrden(`Ordenado ${e.target.value}`);
+    setOrden(e.target.value);
   }
 
   function handleFilterContinent(e) {
