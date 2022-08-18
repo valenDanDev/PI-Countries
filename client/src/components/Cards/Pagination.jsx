@@ -7,24 +7,23 @@ export default function Pagination(props) {
     i++
   ) {
     pageNumbers.push(i);
-    // debugger
   }
 
   return (
-    <nav>
+    <div>
       <ul className={styles.pagination}>
         {pageNumbers &&
           pageNumbers.map((number) => (
             <li key={number} className={styles.page_item}>
               <button
                 onClick={() => props.paginate(number)}
-                href="/#"
+               
               >
                 {number}
               </button>
             </li>
           ))}
       </ul>
-    </nav>
+    </div>
   );
 }

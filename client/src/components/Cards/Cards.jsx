@@ -95,7 +95,8 @@ export default function Cards() {
           <option value="desc">Descending</option>
         </select>
         <select onChange={(e) => handleFilterContinent(e)} className={styles.select_container}>
-          <option hidden  value="All">Filter by continent:</option>
+          <option  hidden value="none">Filter by continent:</option>
+          <option value="All">All continents:</option>
           <option value="South America"> South America </option>
           <option value="North America"> North America </option>
           <option value="Europe"> Europe </option>
@@ -122,7 +123,7 @@ export default function Cards() {
         </select>
       </div>
       </div>
-      <div >
+      <div className={styles.loading}>
         <Pagination
           countriesXPage={countriesXPage}
           countries={countries.length}
