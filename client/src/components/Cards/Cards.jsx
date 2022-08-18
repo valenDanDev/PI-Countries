@@ -72,6 +72,7 @@ export default function Cards() {
   function handleFilterActivity(e) {
     dispatch(filterActivity(e.target.value));
     setCurrentPage(1);
+
   }
 
   function handleSearch(e) {
@@ -110,9 +111,14 @@ export default function Cards() {
         <select className={styles.select_container} onChange={(e) => handleFilterActivity(e)}>
         <option  hidden value="none">Sort By activities:</option>
           <option value="All"> All activities </option>
-          {activities.map((v) => (
-            <option key={v.id} value={v.name}>{v.name}</option>
-          ))}
+          {Array.from(new Set(activities.map(obj => obj.name))).map(name => {
+            return <option key={name} value={name}>{name}</option>
+        })}
+            
+          
+          
+
+       
         </select>
       </div>
       </div>
