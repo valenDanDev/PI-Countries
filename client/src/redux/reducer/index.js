@@ -48,7 +48,7 @@ const initialState = {
       case 'FILTER_BY_CONTINENT':
             const allCountries = state.countriesBackup;
             const continentFilter =
-              action.payload === 'All'
+              action.payload === 'all'
                 ? allCountries
                 : allCountries.filter(
                     (country) => country.continent === action.payload
