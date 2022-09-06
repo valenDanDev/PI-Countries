@@ -1,10 +1,31 @@
 .cards_container{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 15px;
-    padding: 5px;
-
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 10px;
+    justify-self: center;
 }
+
+
+@media (min-width: 767px){
+    .cards_container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 20px;
+        justify-self: center;
+    }
+}
+
+@media (min-width: 1100px){
+    .cards_container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 15px;
+        padding: 5px;
+    
+    }
+}
+
+
 
 .cards{
     margin-top: 1px;
@@ -15,8 +36,14 @@
 
 .filter_container{
     display: flex;
+    flex-wrap: wrap;
     color: white;
+    justify-content: space-evenly;
+    text-align: center;
 }
+
+
+
 
 .select_container{
     margin: 0 5px 0 5px;

@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    justify-content: center;
+    align-items: center;
 }
 
 .landing_container img{
@@ -16,8 +18,7 @@
     border-radius: 5px;
     padding: 5px;
     position:absolute;
-    margin-left: 40%;
-    margin-top: 20%;
+    
 }
 
 .landing_info h2{
