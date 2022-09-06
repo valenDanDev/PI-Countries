@@ -2,6 +2,7 @@ const {Activities,Country,countries_activities} = require("../db.js");
 
 const postActivities = async (req, res) =>{
     const { name,dificulty,duration,season,country } = req.body
+
     try {
         if (!name || !dificulty || !duration || !season ){
             return res.status(404).send("You need more information!!")
@@ -9,13 +10,26 @@ const postActivities = async (req, res) =>{
         if(dificulty<1 || dificulty>5){
             return res.status(404).send("the dificulty of the activity must be between 1 and 5!!")
         }
+       /* const seasonA=season
+       var i=0
+       for ( i=0;  i<seasonA.length;i++){
+           if(seasonA[i]!=="summer" && seasonA[i]!=="spring" ){
+            return res.status(404).send("you must type one of  the four seasons (summer,autumn,winter,spring)!!")
+           }
+           else{
+            console.log('succefully')
+           }
+        }
+        console.log(seasonA);*/
+        /*if(season.map(v=>{
+          v!=="summer" 
+        }) 
         
-        if(season.toLowerCase()!=="summer" && season.toLowerCase()!=="autumn"
-          && season.toLowerCase()!=="winter" && season.toLowerCase()!=="spring" 
+
         ){
           
-            return res.status(404).send("you must type one of  the four seasons (summer,autumn,winter,spring)!!")
-        }
+            return res.status(202).send("you must type one of  the four seasons (summer,autumn,winter,spring)!!")
+        }*/
           let checkActivity = await Activities.findAll({
             where: {
               name: name,
