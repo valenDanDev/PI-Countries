@@ -1,5 +1,6 @@
 import axios from 'axios';
 //country
+
 export function getAllCountries() {
   return async function (dispatch) {
     var json = await axios.get('http://localhost:3001/countries');
@@ -10,6 +11,16 @@ export function getAllCountries() {
     });
   };
 }
+
+/*export const getAllCountries = () => dispatch => {
+  return fetch(
+   'http://localhost:3001/countries'
+  ).then(result=>result.json())
+  .then(json=>{
+    dispatch({type:'GET_COUNTRIES',payload:json})
+  })
+
+};*/
 export function getCountriesName(name) {
   return async function (dispatch) {
     try {
