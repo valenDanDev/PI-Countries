@@ -38,6 +38,8 @@ export default function Cards() {
 
   const paginated = (pageNumber) => setCurrentPage(pageNumber);
 
+
+
   useEffect(() => {
     dispatch(getAllCountries());
     dispatch(getActivities());
@@ -125,9 +127,11 @@ export default function Cards() {
       </div>
       <div className={styles.loading}>
         <Pagination
+          currentPage={currentPage}
           countriesXPage={countriesXPage}
           countries={countries.length}
           paginate={paginated}
+          
         />
       </div>
       <div className={styles.cards_container} >

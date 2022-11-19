@@ -1,0 +1,49 @@
+.page-link{
+    text-decoration: none;
+    width: 40px;
+    border-radius: 8px;
+    margin-left: 0.5px;
+    color: white;
+    background-color: black;
+    border: #B39C21 solid 1px;
+    font-size: 1.3rem;
+    margin-right: 3px;
+    display: block;
+}
+.page-link-s{
+    text-decoration: none;
+    width: 85px;
+    border-radius: 8px;
+    margin-left: 0.5px;
+    color: white;
+    background-color: black;
+    border: #B39C21 solid 1px;
+    font-size: 1.3rem;
+    margin-right: 3px;
+    display: block;
+}
+
+.page-link:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+}
+
+.page-link-s:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;
+}
+
+.active{
+    cursor: pointer;
+    color: black;
+    background-color: #B39C21;
+    border-color:white ;  
+}
+
+.sr-only{
+    width: 60px;
+}

@@ -51,17 +51,19 @@ export function getDetail(id) {
 export function addActivity(body) {
   return async function(dispatch) {
       try {  
-        //console.log(body)  
+        console.log(body)  
           var activity = await axios.post(`http://localhost:3001/activities/create`, body);
           return dispatch({
               type: 'POST_ACTIVITY',
               payload: activity.data
+              
           })
       } catch (error) {
           console.log(error)
       }
   }
 }
+
 export function getActivities() {
   return async function (dispatch) {
     try {

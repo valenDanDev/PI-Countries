@@ -24,10 +24,10 @@ const initialState = {
           ...state,
           detail: action.payload,
         };
-      case 'CREATE_NEW_ACTIVITY':
+      case 'POST_ACTIVITY':
           return {
             ...state,
-            newActivity: action.payload,
+            activities:  [...state.activities, action.payload]
           };
       case 'GET_ACTIVITIES':
             //console.log(action.payload)

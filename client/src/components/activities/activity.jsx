@@ -45,7 +45,6 @@ export default function Activity(){
         state.country.length === 0){
             return alert('you must fill all data');
         } 
-        
         dispatch(addActivity(state))
         alert("Activity created succesfully");
         setState({
@@ -69,9 +68,21 @@ export default function Activity(){
     }
 
     const handleSelect = e => { 
-        setState({
+        /*setState({
             ...state, 
-            country: (state.country.concat(e.target.value)).toString() } ) } 
+            country: (state.country.concat(e.target.value)).toString() } ) */
+            setState({ ...state, country: [...state.country, e.target.value] });
+        
+        } 
+
+            
+  function handleDelete(i) {
+    setState({
+      ...state,
+      country: state.country.filter((el) => el !== i),
+    });
+  }
+
 
     useEffect(() => {
         dispatch(getAllCountries())
@@ -117,15 +128,25 @@ export default function Activity(){
                 </select>
                 <p className={styles.danger}>{errors.season}</p>
                 </div>
+
                 <div className={styles.container}>
                     <label className={styles.label}>Countries: </label>
                     <select className={styles.select_container} name="season" onChange={handleSelect} value={state.id}>
-                        <option>Select the countries of the activity...</option>
+                        <option disabled="disabled">Select the countries of the activity...</option>
                         {countries?.map(mp => (
-                            <option key={mp.id} value={mp.name}>{mp.name}</option>
+                            <option key={mp.id} value={mp.id}>{mp.name}</option>
                     ))}       
                     </ select>
                 </div>
+
+                <div className={styles.textArea} >
+                {state.country.map((country) => (
+                <div className={styles.countryButton} key={country}>
+                  <input className={styles.btnDelete} type='button' value='X' onClick={() => handleDelete(country)}/>
+                  <p className='pOfCountry'  key={country}>{country}</p>
+                </div>
+              ))}
+            </div>
                 </div>
                 <div className={styles.buttons}>
                      <button className={styles.buton_b} >Add activity</button>
