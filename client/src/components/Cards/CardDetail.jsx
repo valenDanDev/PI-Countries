@@ -49,14 +49,17 @@ export default function CardDetail (){
          <div className={styles.details_container}>
              <img src={details.image} alt="flag_image" className={styles.image} />
              <div className={styles.infoDetail}>
-          
+                 
                   <h3>{details.name}</h3>
-                  <p>Code: {details.id}</p>
-                  <p>Capital: {details.capital}</p>
-                  <p>Subregion: {details.subregion}</p>
-                  <p>Area: {details.area } km<sup>2</sup></p>
-                  <p>Population: {details.population}</p> 
+                  <p className={styles.country}>Code: <span>{details.id}</span> </p>
+                  <p className={styles.country}>Capital: <span>{details.capital}</span> </p>
+                  <p className={styles.country}>Subregion: <span>{details.subregion}</span> </p>
+                  <p className={styles.country}>Area: <span>{details.area } km<sup>2</sup></span> </p>
+                  <p className={styles.country}>Population: <span>{details.population}</span> </p> 
                   <div >
+                  <div>
+                  <h2 className={styles.titlA}>Activities in <span>{details.name}</span> </h2>
+                  </div>
                      {details.activities?.length > 0 ? details.activities?.map(r => {
                          return (
                              <ActXcountries
@@ -70,7 +73,7 @@ export default function CardDetail (){
                              />
                          )
                      })
-                     : <p className={styles.error}>There are no activities !!</p>}
+                     : <p className={styles.error}>There are no activities in <span> {details.name} !! </span></p>}
                      
                      </div>
                      <button className={styles.card_d} onClick={(e) => {handleClick(e); }}   > Back</button>

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getCountriesName } from '../../redux/actions';
+import { getCountriesName,getAllCountries } from '../../redux/actions';
 import styles from './SearchBar.module.css';
 
 
 
 
 export default function SearchBar() {
+    var [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const [name, setName] = useState('');
 
@@ -19,6 +20,13 @@ export default function SearchBar() {
         e.preventDefault();
         dispatch(getCountriesName(name));
         setName('');
+        setShow(show=true);
+    }
+
+    function handleClick(e){
+        e.preventDefault();
+        dispatch(getAllCountries());
+        setShow(show=false);
     }
 
     return (
@@ -30,6 +38,7 @@ export default function SearchBar() {
               onChange={handleInputChange}
            />
            <button  type="submit" onClick={handleSubmit}>Search</button>
+           <button className={`buton_bs ${!show ? "hide-lightboxs" : ""}`} onClick={(e) => {handleClick(e); }}   > Back</button>
       </div>
     )
 

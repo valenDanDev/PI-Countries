@@ -21,6 +21,10 @@ export default function Cards() {
   let countriesXPage = 10;
   let firstCountry,lastCountry
   const [, setOrden] = useState("");
+  var [show, setShow] = useState(false);
+
+
+
 
   if(currentPage>1){
     countriesXPage=9
@@ -41,24 +45,27 @@ export default function Cards() {
 
 
   useEffect(() => {
-    dispatch(getAllCountries());
+      dispatch(getAllCountries());
     dispatch(getActivities());
   }, [dispatch]);
 
 
 
   function handleClick(e) {
+    setShow(show=false);
     e.preventDefault();
     dispatch(getAllCountries());
   }
 
   function handleSortBy(e) {
+    setShow(show=true);
     let i=e.target.value.toLowerCase();
     dispatch(orderByName(i));
     setCurrentPage(1);
     setOrden(e.target.value);
   }
   function handleSortByP(e) {
+    setShow(show=true);
     let i=e.target.value.toLowerCase();
     dispatch(orderByPopulation(i));
     setCurrentPage(1);
@@ -66,16 +73,19 @@ export default function Cards() {
   }
 
   function handleFilterContinent(e) {
+    setShow(show=true);
     let i=e.target.value.toLowerCase();
     dispatch(filterCountriesContinent(i));
     setCurrentPage(1);
   }
 
   function handleFilterActivity(e) {
+    setShow(show=true);
     dispatch(filterActivity(e.target.value));
     setCurrentPage(1);
 
   }
+
 
   function handleSearch(e) {
     setCurrentPage(1);
@@ -86,8 +96,8 @@ export default function Cards() {
       <div className={styles.filter_container}>
         <div onChange={(e) => handleSearch(e)}  >
         <h2 >Search country:</h2> 
-          <SearchBar/>
-          <button className={styles.buton_b} onClick={(e) => {handleClick(e); }}   > Back</button>
+          <SearchBar />
+          <button className={`buton_b ${!show ? "hide-lightbox" : ""}`} onClick={(e) => {handleClick(e); }}   > Back</button>
         </div>
         <div >
         <h2 >Sort by:</h2>

@@ -4,6 +4,7 @@ import { getAllCountries, addActivity } from '../../redux/actions';
 import { Link } from "react-router-dom"
 import Navbar from '../Navigation/Navbar';
 import styles from "./activities.module.css"
+import swal from 'sweetalert';
 
 export function validate(input) {
     let errors = {};
@@ -43,10 +44,24 @@ export default function Activity(){
         state.dificulty === "" ||
         state.season === "" ||
         state.country.length === 0){
-            return alert('you must fill all data');
+            //return alert('you must fill all data');
+            e.preventDefault()
+            return swal({
+                icon: "error",
+                title: "Ohhh!",
+                text: "Please check and complete all the fields",
+                confirmButtonText: "Ok",
+            });
         } 
         dispatch(addActivity(state))
-        alert("Activity created succesfully");
+        //alert("Activity created succesfully");
+        swal({
+          customClass:"styleTitle",  
+          icon: "success",
+          title: "Success",
+          text: "activity created succesfully",
+          confirmButtonText: "Ok",
+      });
         setState({
             name: "",
             dificulty: "",
@@ -101,14 +116,14 @@ export default function Activity(){
                     <p className={styles.danger}>{errors.name}</p>
                 </div>
                 <div className={styles.container}>
-                    <label className={styles.label}>Duration (minutes): </label>
+                    <label className={styles.label}>Duration of the activity: </label>
                     <input type="text" className={styles.input} name="duration" value={state.duration} placeholder="Duration here..."onChange={handleChange} />
                     <p className={styles.danger}>{errors.duration}</p>
                 </div>
                 <div className={styles.container}>
                     <label className={styles.label}>Difficulty: </label>
                     <select className={styles.select_container} name="dificulty" onChange={handleChange} >
-                    <option value="---">Select difficulty</option>
+                    <option value="---" disabled="disabled">Select difficulty</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
                         <option value={3}>3</option>
@@ -120,7 +135,7 @@ export default function Activity(){
                 <div className={styles.container}>
                 <label className={styles.label}>Season: </label>
                 <select className={styles.select_container} name="season" onChange={handleChange}>
-                    <option value="---">Select season</option>
+                    <option value="---" disabled="disabled">Select season</option>
                     <option value={state.Spring}>Spring</option>
                     <option value={state.Summer}>Summer</option>
                     <option value={state.Autumn}>Autumn</option>
