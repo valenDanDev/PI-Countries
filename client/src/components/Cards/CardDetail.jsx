@@ -1,25 +1,42 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getDetail} from '../../redux/actions';
+import { useParams,useHistory } from 'react-router-dom';
+import { getDetail,restartDetail } from '../../redux/actions';
 import {  useEffect } from 'react';
-import { Link } from "react-router-dom";
+
 import ActXcountries from './ActXCountry';
 import styles from './Cardetail.module.css';
 import Navbar from '../Navigation/Navbar';
 
-
+//restartDetail
 export default function CardDetail (){
   const dispatch = useDispatch()
   const details = useSelector((state) => state.detail);
+  const history = useHistory();
   const { id } = useParams();
+
   useEffect(() => {
+    const timer = setTimeout(() => {
       dispatch(getDetail(id)); 
-     
-  },[dispatch,id]);  
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [dispatch,id]);
+
+  // useEffect(() => {
+      
+  // },);  
  
 
+  /*useEffect(()=>{
+    console.log(details)
+},[details])*/
 
+  function handleClick(e) {
+    dispatch(restartDetail());
+    history.push('/home');
+  }
+  var size = Object.keys(details).length;
+  //console.log(details);
 
   return (
     <div>
@@ -28,7 +45,7 @@ export default function CardDetail (){
         <h2>detail of the country</h2>
         <div className={styles.CardDetail_container}>
             
-    {details?
+    {size?
          <div className={styles.details_container}>
              <img src={details.image} alt="flag_image" className={styles.image} />
              <div className={styles.infoDetail}>
@@ -56,11 +73,11 @@ export default function CardDetail (){
                      : <p className={styles.error}>There are no activities !!</p>}
                      
                      </div>
-                     <Link to='/home'><button className={styles.card_d} >Back Home</button></Link>  
+                     <button className={styles.card_d} onClick={(e) => {handleClick(e); }}   > Back</button>
                  
              </div>
               
-         </div> :<p className={styles.error}>There are no details !!</p> }
+         </div> :<p className={styles.loading}>Loading...</p> }
        
        
  </div>

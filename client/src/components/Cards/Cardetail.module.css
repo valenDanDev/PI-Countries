@@ -67,3 +67,8 @@
     color: red;
     text-align: center;
 }
+.loading{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}

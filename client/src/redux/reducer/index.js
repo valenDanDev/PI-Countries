@@ -24,6 +24,12 @@ const initialState = {
           ...state,
           detail: action.payload,
         };
+        case 'CLEAN':
+          return{
+              ...state,
+              detail: action.payload
+          }
+
       case 'POST_ACTIVITY':
           return {
             ...state,

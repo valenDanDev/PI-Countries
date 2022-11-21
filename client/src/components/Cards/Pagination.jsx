@@ -18,10 +18,10 @@ export default function Pagination(props) {
       </div>
      
       <ul className={styles.pagination}>
-      <li class={styles.page_item}>
-          <Link class="page-link-s" to={props.currentPage-1} onClick={() => props.paginate(props.currentPage-1)} aria-label="Previous">
+      <li className={styles.page_item}>
+          <Link className="page-link-s" to={props.currentPage} onClick={() =>  props.currentPage>1?props.paginate(props.currentPage-1): props.paginate(props.currentPage)} aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
+            <span className="sr-only">Previous</span>
           </Link>
         </li>
     
@@ -29,7 +29,7 @@ export default function Pagination(props) {
           pageNumbers.map((number) => (
             <li key={number} className={styles.page_item}>
               <Link 
-               className={`page-link ${props.currentPage === number ? "active" : ""}`}
+               className={`page-link ${props.currentPage === number ? "actives" : ""}`}
                 onClick={() => props.paginate(number)}
                 to={number}
               >
@@ -37,10 +37,10 @@ export default function Pagination(props) {
               </Link>
             </li>
           ))}
-                  <li class={styles.page_item}>
-          <Link class="page-link-s" to={props.currentPage+1} onClick={() => props.paginate(props.currentPage+1)} aria-label="Next">
+                  <li className={styles.page_item}>
+          <Link className="page-link-s" to={props.currentPage} onClick={() => props.currentPage<i-1?props.paginate(props.currentPage+1): props.paginate(props.currentPage)} aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
+            <span className="sr-only">Next</span>
           </Link>
         </li>
       </ul>

@@ -47,6 +47,13 @@ export function getDetail(id) {
     });
   };
 }
+
+export function restartDetail() {
+  return (dispatch)=>{
+   // console.log("clean")
+    return dispatch({type: 'CLEAN', payload: {}})
+}
+}
 //activities
 export function addActivity(body) {
   return async function(dispatch) {
