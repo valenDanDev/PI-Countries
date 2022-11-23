@@ -13,7 +13,10 @@ export default function Pagination(props) {
 
   return (
     <div>
-      <div className={styles.tittle}>
+      {i-1!==0?
+      
+    <div>
+             <div className={styles.tittle}>
       page  {props.currentPage}/{i-1}
       </div>
      
@@ -44,6 +47,9 @@ export default function Pagination(props) {
           </Link>
         </li>
       </ul>
+
+    </div>:<p></p>}
+
     </div>
   );
 }

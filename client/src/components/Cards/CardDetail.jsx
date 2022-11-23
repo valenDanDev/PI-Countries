@@ -18,7 +18,7 @@ export default function CardDetail (){
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(getDetail(id)); 
-    }, 600);
+    }, 400);
     return () => clearTimeout(timer);
   }, [dispatch,id]);
 

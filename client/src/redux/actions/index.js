@@ -4,7 +4,7 @@ import axios from 'axios';
 export function getAllCountries() {
   return async function (dispatch) {
     var json = await axios.get('http://localhost:3001/countries');
-
+    console.log(json.data)
     return dispatch({
       type: 'GET_COUNTRIES',
       payload: json.data,
@@ -34,6 +34,7 @@ export function getCountriesName(name) {
       });
     } catch (error) {
       console.log(error);
+      dispatch({ type: 'GET_COUNTRIES_NAME', payload: [] })
     }
   };
 }

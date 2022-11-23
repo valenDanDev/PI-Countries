@@ -21,7 +21,7 @@
         grid-template-columns: repeat(3,1fr);
         grid-gap: 15px;
         padding: 5px;
-    
+        height: auto;
     }
 }
 
@@ -76,5 +76,36 @@
     font-size: 40px;
 }
 
+.details_container{
+    border: solid #B39C21 1px;
+    border-radius: 4px;
+    color: white;
+    width: 700px;
+    height: auto;
+    margin-left: 45%;
+    background-color: black;
+}
 
+.notfound_t{
+    text-align: center;
+    color: #B39C21;
+    font-size: 1.7rem;
+}
 
+.notfound_te{
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.image_container{
+   max-width: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.image_container img{
+    max-width: 100%;
+    max-height: 100%;
+    background-color: #B39C21;
+    margin-left: 100%;
+}
