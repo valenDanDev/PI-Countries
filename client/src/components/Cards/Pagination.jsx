@@ -22,7 +22,7 @@ export default function Pagination(props) {
      
       <ul className={styles.pagination}>
       <li className={styles.page_item}>
-          <Link className="page-link-s" to={props.currentPage} onClick={() =>  props.currentPage>1?props.paginate(props.currentPage-1): props.paginate(props.currentPage)} aria-label="Previous">
+          <Link to={props.currentPage}  className="page-link-s"  onClick={() =>  props.currentPage>1?props.paginate(props.currentPage-1): props.paginate(props.currentPage)} aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
             <span className="sr-only">Previous</span>
           </Link>
@@ -41,7 +41,7 @@ export default function Pagination(props) {
             </li>
           ))}
                   <li className={styles.page_item}>
-          <Link className="page-link-s" to={props.currentPage} onClick={() => props.currentPage<i-1?props.paginate(props.currentPage+1): props.paginate(props.currentPage)} aria-label="Next">
+          <Link  to={props.currentPage}  className="page-link-s" onClick={() => props.currentPage<i-1?props.paginate(props.currentPage+1): props.paginate(props.currentPage)} aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>
           </Link>

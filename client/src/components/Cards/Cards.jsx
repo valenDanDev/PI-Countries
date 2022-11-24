@@ -115,7 +115,6 @@ export default function Cards() {
         <div onChange={(e) => handleSearch(e)}  >
         <h2 >Search country:</h2> 
           <SearchBar />
-          {console.log(countries.length)}
           <button className={`buton_b ${!show ? "hide-lightbox" : ""}`} onClick={(e) => {handleClick(e); }}   > Clear filters</button>
         </div>
         <div >
@@ -173,14 +172,14 @@ export default function Cards() {
                     />
               );
             })
-          : <p className={styles.details_container} > 
+          : <div className={styles.details_container} > 
           <h2 className={styles.notfound_t}> 404 COUNTRIES NOT FOUND  </h2>
           <p className={styles.notfound_te}>We are sorry to tell you that we couldn't find the country you were looking for  </p>
           <p className={styles.image_container}>
             <img src='./img/countries.png' alt="imgn"></img>
           </p>
             
-           </p>}
+           </div>}
       </div>
         </div>        
    

@@ -5,14 +5,17 @@ export default function Navbar (){
     return (
         <nav className={styles.nav_container}>
         <div className={styles.navigation}>          
-            <Link className={styles.logo} to="/home">
+            <Link className={styles.logo} to={"/home"}>
                 Countries
             </Link>
               <div className={styles.navbar}>
-              <NavLink 
+                <div className="nv_">
+                <NavLink 
                   className={ ({isActive}) => `link  ${ isActive ? 'active':'' }` }
-                  to="/activitiesCreate"
+                  to={"/activitiesCreate"}
               >  Create activities   </NavLink>  
+                </div>
+              
           </div>
         </div>
         </nav>

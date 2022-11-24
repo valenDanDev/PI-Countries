@@ -7,7 +7,7 @@ export default function LandingPage() {
             <img src='./img/countries.png' alt='paises'/>
             <div className={styles.landing_info}>
                  <h2>Welcome to countries project</h2>
-                 <Link to="/home">
+                 <Link to={"/home"}>
                      <p>ENTER  </p>
                   </Link>
             </div> 

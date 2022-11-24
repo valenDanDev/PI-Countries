@@ -165,7 +165,7 @@ export default function Activity(){
                 </div>
                 <div className={styles.buttons}>
                      <button className={styles.buton_b} >Add activity</button>
-                     <Link to="/home"><button className={styles.buton_b}>Back</button></Link>
+                     <Link to={"/home"}><button className={styles.buton_b}>Back</button></Link>
                 </div>               
             </form>
         </div>

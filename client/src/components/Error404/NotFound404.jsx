@@ -17,7 +17,7 @@ function NotFound404() {
             <img src='./img/countries.png' alt="imgn"></img>
           </p>
              <p className={styles.notfound_te}>Go back to</p>
-              <Link to="/home">
+              <Link to={"/home"}>
                 <button className={styles.card_d}>Home</button>
             </Link>
         </div> 
