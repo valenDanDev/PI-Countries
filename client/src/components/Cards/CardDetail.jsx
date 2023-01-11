@@ -7,6 +7,7 @@ import {  useEffect } from 'react';
 import ActXcountries from './ActXCountry';
 import styles from './Cardetail.module.css';
 import Navbar from '../Navigation/Navbar';
+import Footer from '../footer/footer';
 
 //restartDetail
 export default function CardDetail (){
@@ -84,6 +85,7 @@ export default function CardDetail (){
        
        
  </div>
+ <Footer/>
  </div>
 
     </div>
