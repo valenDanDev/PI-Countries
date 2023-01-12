@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Navbar from '../Navigation/Navbar'
 import styles from './NotFound404.module.css'
+import Footer from '../footer/footer';
 
 function NotFound404() {
   return (
@@ -24,6 +25,7 @@ function NotFound404() {
           </div>
    
         </div>
+        <Footer/>
     </div>
   )
 }

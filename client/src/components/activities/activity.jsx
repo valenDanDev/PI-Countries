@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAllCountries, addActivity } from '../../redux/actions';
 import { Link } from "react-router-dom"
 import Navbar from '../Navigation/Navbar';
+import Footer from '../footer/footer';
 import styles from "./activities.module.css"
 import swal from 'sweetalert';
 
@@ -169,6 +170,7 @@ export default function Activity(){
                 </div>               
             </form>
         </div>
+        <Footer/>
         </div>
     )
 }
