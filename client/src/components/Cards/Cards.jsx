@@ -18,6 +18,7 @@ export default function Cards() {
     (state) => state.activities);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const error = useSelector((state) => state.error);
   let countriesXPage = 10;
   let firstCountry,lastCountry
   const [, setOrden] = useState("");
@@ -162,25 +163,35 @@ export default function Cards() {
           
         />
       </div>
-              <div className={styles.cards_container} >
-        {currentCountries.length
-          ? currentCountries.map((country) => {
-              return (
-                    <Card
-                      key={country.id} 
-                      { ...country }
-                    />
-              );
-            })
-          : <div className={styles.details_container} > 
-          <h2 className={styles.notfound_t}> 404 COUNTRIES NOT FOUND  </h2>
-          <p className={styles.notfound_te}>We are sorry to tell you that we couldn't find the country you were looking for  </p>
-          <p className={styles.image_container}>
-            <img src='./img/countries.png' alt="imgn"></img>
-          </p>
-            
-           </div>}
-      </div>
+<div className={styles.cards_container}>
+
+  {error ? (
+    // 🚨 API ERROR STATE
+    <div className={styles.details_container}>
+      <h2 className={styles.notfound_t}>Error</h2>
+      <p className={styles.notfound_te}>{error}</p>
+    </div>
+
+  ) : currentCountries.length ? (
+    // ✅ SUCCESS STATE
+    currentCountries.map((country) => (
+      <Card key={country.id} {...country} />
+    ))
+
+  ) : (
+    // ❌ EMPTY STATE (no results)
+    <div className={styles.details_container}> 
+      <h2 className={styles.notfound_t}>404 COUNTRIES NOT FOUND</h2>
+      <p className={styles.notfound_te}>
+        We are sorry to tell you that we couldn't find the country you were looking for
+      </p>
+      <p className={styles.image_container}>
+        <img src='./img/countries.png' alt="imgn" />
+      </p>
+    </div>
+  )}
+
+</div>
         </div>        
    
       }

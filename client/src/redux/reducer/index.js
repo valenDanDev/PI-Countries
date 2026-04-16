@@ -11,8 +11,16 @@ const initialState = {
         return {
           ...state,
           allCountries: action.payload,
-          countriesBackup: action.payload,   
+          countriesBackup: action.payload,
+          error: null,   
         };
+        case 'GET_COUNTRIES_ERROR':
+          return {
+            ...state,
+            allCountries: [],
+            countriesBackup: [],
+            error: action.payload,
+          };
       case 'GET_COUNTRIES_NAME':
         return {
           ...state,
@@ -23,7 +31,14 @@ const initialState = {
         return {
           ...state,
           detail: action.payload,
+           error: null,   
         };
+        case 'GET_DETAIL_ERROR':
+          return {
+            ...state,
+            detail: {},
+            error: action.payload,
+          };
         case 'CLEAN':
           return{
               ...state,
@@ -36,11 +51,18 @@ const initialState = {
             activities:  [...state.activities, action.payload]
           };
       case 'GET_ACTIVITIES':
-            //console.log(action.payload)
+          return {
+            ...state,
+            activities: action.payload,
+            error: null,
+          };
+
+        case 'GET_ACTIVITIES_ERROR':
             return {
-                ...state,
-                activities: action.payload,
-            }
+              ...state,
+              activities: [],
+              error: action.payload,
+            };
       case 'ORDER_BY_NAME':
           return {
             ...state,

@@ -3,12 +3,21 @@ import axios from 'axios';
 
 export function getAllCountries() {
   return async function (dispatch) {
-    var json = await axios.get('http://localhost:3001/countries');
-    // console.log(json.data)
-    return dispatch({
-      type: 'GET_COUNTRIES',
-      payload: json.data,
-    });
+    try {
+      const res = await axios.get('http://localhost:3001/countries');
+
+      return dispatch({
+        type: 'GET_COUNTRIES',
+        payload: res.data,
+      });
+
+    } catch (error) {
+       console.log("Caught error:", error);
+      return dispatch({
+        type: 'GET_COUNTRIES_ERROR',
+        payload: error.response?.data?.msg || 'Error fetching countries',
+      });
+    }
   };
 }
 
@@ -39,13 +48,23 @@ export function getCountriesName(name) {
   };
 }
 export function getDetail(id) {
-//  console.log("entra");
   return async (dispatch) => {
-    var json = await axios.get(`http://localhost:3001/countries/country/${id}`);
-    return dispatch({
-      type: 'GET_DETAIL',
-      payload: json.data[0],
-    });
+    try {
+      const json = await axios.get(
+        `http://localhost:3001/countries/country/${id}`
+      );
+
+      return dispatch({
+        type: 'GET_DETAIL',
+        payload: json.data[0],
+      });
+
+    } catch (error) {
+      dispatch({
+        type: 'GET_DETAIL_ERROR',
+        payload: error.response?.data?.msg || 'Error fetching detail',
+      });
+    }
   };
 }
 
@@ -55,6 +74,8 @@ export function restartDetail() {
     return dispatch({type: 'CLEAN', payload: {}})
 }
 }
+//activities
+
 //activities
 export function addActivity(body) {
   return async function(dispatch) {
@@ -75,16 +96,22 @@ export function addActivity(body) {
 export function getActivities() {
   return async function (dispatch) {
     try {
-      let json = await axios.get('http://localhost:3001/activities');
-      return dispatch({
-          type: 'GET_ACTIVITIES',
-          payload: json.data
-      })
-  } catch (error) {
-      // console.log(error)
-  }
+      const res = await axios.get('http://localhost:3001/activities');
+
+      dispatch({
+        type: 'GET_ACTIVITIES',
+        payload: res.data,
+      });
+
+    } catch (error) {
+      dispatch({
+        type: 'GET_ACTIVITIES_ERROR',
+        payload: error.response?.data?.msg || 'Error fetching activities',
+      });
+    }
   };
 }
+
 //filters
 export function orderByName(payload) {
   return {
