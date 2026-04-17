@@ -1,30 +1,37 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const {getCountries}=require("./src/controllers/countriesController")
+const { getCountries } = require("./src/controllers/countriesController");
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  getCountries();
+const startServer = async () => {
+  let connected = false;
+
+  // ⏳ WAIT FOR DB
+  while (!connected) {
+    try {
+      await conn.authenticate();
+      console.log("✅ DB connected");
+      connected = true;
+    } catch (err) {
+      console.log("⏳ Waiting for DB...");
+      await new Promise(res => setTimeout(res, 2000));
+    }
+  }
+
+  // 🔄 Sync DB
+  await conn.sync({ force: true });
+
+  // 🌍 Load countries
+  try {
+    await getCountries(); // 👈 NOW awaited
+    console.log("🌍 Countries loaded");
+  } catch (err) {
+    console.error("❌ Error loading countries:", err.message);
+  }
+
+  // 🚀 Start server
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log("🚀 Server running on 3001");
   });
-});
+};
+
+startServer();

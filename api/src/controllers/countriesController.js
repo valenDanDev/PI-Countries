@@ -4,51 +4,49 @@ const { Op } = require("sequelize");
 
 const getCountries = async () => {
   try {
-    let countries = await axios.get("https://restcountries.com/v3/all");
-    let response = countries.data?.map((r) => {
-      let cap,reg;
-      
-      if(typeof r.capital === 'undefined'){
-        cap="NO capital"
-      }else{
-        cap=r.capital[0];
-      }
-      if(typeof r.subregion === 'undefined'){
-        reg="NO subregion"
-      }else{
-        reg=r.subregion
-      }
-      
+    console.log("🚀 Calling external API...");
 
-      return {
-        id: r.cca3,
-        name: r.name.common,
-        image:r.flags[0],
-        continent:r.continents[0],
-        capital: cap,
-        subregion:reg,
-        area:r.area,
-        population:r.population
-      };
-    });
- 
-   
-    response.forEach(async (r) => {
-      await Country.findOrCreate({
-        where: {
-          id: r.id,
-          name: r.name.toLowerCase(),
-          image:r.image,
-          continent:r.continent.toLowerCase(),
-          capital: r.capital.toLowerCase(),
-          subregion:r.subregion.toLowerCase(),
-          area:r.area,
-          population:r.population
-        },
-      });
-    });
+    const countries = await axios.get(
+      "https://restcountries.com/v3.1/all?fields=cca3,name,flags,continents,capital,area,population,region"
+    );
+
+    console.log("✅ API responded");
+
+    const response = countries.data.map((r) => ({
+      id: r.cca3,
+      name: r.name.common,
+      image: r.flags?.png || "",
+      continent: r.continents?.[0] || "unknown",
+      capital: r.capital?.[0] || "NO capital",
+      subregion: r.region || "NO region",
+      area: r.area,
+      population: r.population,
+    }));
+
+    console.log("🧠 Mapping done, inserting DB...");
+
+await Promise.all(
+  response.map((r) =>
+    Country.findOrCreate({
+      where: { id: r.id }, // 👈 ONLY UNIQUE
+      defaults: {
+        name: r.name.toLowerCase(),
+        image: r.image,
+        continent: r.continent.toLowerCase(),
+        capital: r.capital.toLowerCase(),
+        subregion: r.subregion.toLowerCase(),
+        area: r.area,
+        population: r.population,
+      },
+    })
+  )
+);
+
+    console.log("✅ DB insert finished");
+
   } catch (e) {
-    console.error(e);
+    console.error("❌ ERROR IN getCountries:", e);
+    throw e; // 👈 important for debugging
   }
 };
 
